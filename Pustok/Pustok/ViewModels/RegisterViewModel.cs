@@ -19,4 +19,7 @@ public class RegisterViewModel
     [Required]
     [Compare("Password", ErrorMessage = "Password's doesn't match")]
     public string ConfirmPassword { get; set; }
+
+    [Required]
+    public string ActivationCode { get; set; }
 }

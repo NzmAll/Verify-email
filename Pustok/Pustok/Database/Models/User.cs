@@ -19,4 +19,6 @@ public class User : BaseEntity<int>, IAuditable
     public Role.Values Role { get; set; } = Contracts.Role.Values.SuperAdmin;
 
     public List<Order> Orders { get; set; }
+    public string ActivationCode { get; internal set; }
+    public DateTime ActivationCodeExpiration { get; internal set; }
 }
