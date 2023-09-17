@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Pustok.Database;
 
 namespace ApplicationDbContext
 {
     public class ApplicationDbContext : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly PustokDbContext _pustokDbContext;
 
         public ApplicationDbContext(ApplicationDbContext context)
         {
@@ -13,7 +15,7 @@ namespace ApplicationDbContext
 
         public IActionResult ActivateAccount(string code)
         {
-            var user = _context.User.SingleOrDefault(u => u.ActivationCode == code);
+            var user = _pustokDbContext.Users.SingleOrDefault(u => u.ActivationCode == code);
 
             if (user == null)
             {
@@ -23,9 +25,7 @@ namespace ApplicationDbContext
 
             if (user.ActivationCodeExpiration >= DateTime.UtcNow)
             {
-                user.IsActive = true;
                 user.ActivationCode = null;
-                user.ActivationCodeExpiration = null;
 
                 _context.SaveChanges();
                 TempData["Message"] = "Account active. U are login now.";
