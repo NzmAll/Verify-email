@@ -8,9 +8,10 @@ namespace ApplicationDbContext
         private readonly ApplicationDbContext _context;
         private readonly PustokDbContext _pustokDbContext;
 
-        public ApplicationDbContext(ApplicationDbContext context)
+        public ApplicationDbContext(ApplicationDbContext context, PustokDbContext pustokDbContext)
         {
             _context = context;
+            _pustokDbContext = pustokDbContext;
         }
 
         public IActionResult ActivateAccount(string code)
